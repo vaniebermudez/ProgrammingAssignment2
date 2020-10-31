@@ -3,31 +3,32 @@
 
 ## Write a short comment describing this function
 
-makeVector <- function(x = numeric()) {
-        m <- NULL
+makeVector <- function(x = matrix()) {
+        inv <- NULL
         set <- function(y) {
                 x <<- y
-                m <<- NULL
+                inv <<- NULL
         }
         get <- function() x
-        setmean <- function(mean) m <<- mean
-        getmean <- function() m
-        list(set = set, get = get,
-             setmean = setmean,
-             getmean = getmean)
+        setInverse <- function(inverse) inv <<- inverse
+        getInverse <- function() inv
+        list(set = set, 
+             get = get,
+             setInverse = setInverse,
+             getInverse = getInverse)
 }
 
 
 ## Write a short comment describing this function
 
-cachemean <- function(x, ...) {
-        m <- x$getmean()
-        if(!is.null(m)) {
+cacheInv <- function(x, ...) {
+        m <- x$getInverse()
+        if(!is.null(inv)) {
                 message("getting cached data")
-                return(m)
+                return(inv)
         }
         data <- x$get()
         m <- mean(data, ...)
-        x$setmean(m)
-        m
+        x$setInverse(inv)
+        inv
 }
